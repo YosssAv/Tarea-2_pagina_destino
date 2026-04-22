@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubre Tu Destino - Página de Destinos Turísticos</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <div id="root"></div>
+    
+    <!-- React y React DOM desde CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel para transformar JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Aplicación Principal -->
+    <script type="text/babel">
+        // Datos estáticos de destinos
+        const destinationsData = {
+          "destinations": [
+            {
+              "id": 1,
+              "location": "Barcelona, España",
+              "description": "Barcelona es una vibrante ciudad costera conocida por su arquitectura modernista, playas mediterráneas y vida cultural. Puedes disfrutar de la gastronomía catalana, museos de clase mundial y una atmósfera única que combina lo antiguo y lo moderno.",
+              "country": "España",
+              "capital": "Madrid",
+              "language": "Español (Castellano)",
+              "currency": "Euro (€)",
+              "costPerDay": "$$$",
+              "activities": [
+                {
+                  "name": "Visitar",
+                  "description": "La Sagrada Familia y Parque Güell"
+                },
+                {
+                  "name": "Recorrer",
+                  "description": "Las Ramblas y Barrio Gótico"
+                },
+                {
+                  "name": "Disfrutar",
+                  "description": "Playas y tapas en el Port Vell"
+                }
+              ],
+              "nearbyPlaces": [
+                "Montserrat",
+                "Colònia de Sant Jordi",
+                "Costa Brava"
+              ]
+            },
+            {
+              "id": 2,
+              "location": "París, Francia",
+              "description": "La Ciudad de la Luz es el destino romántico por excelencia. Famosa por su arquitectura icónica, museos de renombre mundial, gastronomía refinada y la encantadora atmósfera de sus cafés parisinos.",
+              "country": "Francia",
+              "capital": "París",
+              "language": "Francés",
+              "currency": "Euro (€)",
+              "costPerDay": "$$$",
+              "activities": [
+                {
+                  "name": "Visitar",
+                  "description": "Torre Eiffel y Arco del Triunfo"
+                },
+                {
+                  "name": "Recorrer",
+                  "description": "Museos (Louvre, Orsay)"
+                },
+                {
+                  "name": "Disfrutar",
+                  "description": "Crucero por el Sena"
+                }
+              ],
+              "nearbyPlaces": [
+                "Versalles",
+                "Disneyland París",
+                "Fontainebleau"
+              ]
+            },
+            {
+              "id": 3,
+              "location": "Tokio, Japón",
+              "description": "Tokio es una metrópolis fascinante que mezcla tradición milenaria con tecnología de punta. Desde templos antiguos hasta rascacielos modernos, pasando por mercados tradicionales y distritos electrizantes.",
+              "country": "Japón",
+              "capital": "Tokio",
+              "language": "Japonés",
+              "currency": "Yen Japonés (¥)",
+              "costPerDay": "$$",
+              "activities": [
+                {
+                  "name": "Visitar",
+                  "description": "Templos de Senso-ji y Tsukiji"
+                },
+                {
+                  "name": "Recorrer",
+                  "description": "Shibuya, Shinjuku y Akihabara"
+                },
+                {
+                  "name": "Disfrutar",
+                  "description": "Gastronomía japonesa y karaoke"
+                }
+              ],
+              "nearbyPlaces": [
+                "Monte Fuji",
+                "Nikko",
+                "Kamakura"
+              ]
+            },
+            {
+              "id": 4,
+              "location": "Cancún, México",
+              "description": "Cancún es un paraíso tropical con playas de arena blanca y aguas turquesas. Perfecto para relajarse, disfrutar de actividades acuáticas y explorar la antigua cultura maya.",
+              "country": "México",
+              "capital": "Ciudad de México",
+              "language": "Español",
+              "currency": "Peso Mexicano ($)",
+              "costPerDay": "$$",
+              "activities": [
+                {
+                  "name": "Visitar",
+                  "description": "Cenotes y Ruinas Mayas de Tulum"
+                },
+                {
+                  "name": "Recorrer",
+                  "description": "Isla Mujeres en barco"
+                },
+                {
+                  "name": "Disfrutar",
+                  "description": "Playas y snorkel"
+                }
+              ],
+              "nearbyPlaces": [
+                "Playa del Carmen",
+                "Cozumel",
+                "Xcaret"
+              ]
+            },
+            {
+              "id": 5,
+              "location": "Nueva York, USA",
+              "description": "La ciudad que nunca duerme ofrece una experiencia única con sus icónicos rascacielos, museos de clase mundial, entretenimiento sin fin y una mezcla diversa de culturas.",
+              "country": "Estados Unidos",
+              "capital": "Washington D.C.",
+              "language": "Inglés",
+              "currency": "Dólar Estadounidense ($)",
+              "costPerDay": "$$$",
+              "activities": [
+                {
+                  "name": "Visitar",
+                  "description": "Estatua de la Libertad y Times Square"
+                },
+                {
+                  "name": "Recorrer",
+                  "description": "Museos y Broadway"
+                },
+                {
+                  "name": "Disfrutar",
+                  "description": "Gastronomía diversa y vida nocturna"
+                }
+              ],
+              "nearbyPlaces": [
+                "Las Cataratas del Niágara",
+                "Filadelfia",
+                "Boston"
+              ]
+            }
+          ]
+        };
+
+        // Componente para la sección de carga de foto
+        function UploadSection({ photoUrl, onPhotoUpload }) {
+          const fileInputRef = React.useRef(null);
+
+          const handleFileChange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                onPhotoUpload(event.target.result);
+              };
+              reader.readAsDataURL(file);
+            }
+          };
+
+          const handleButtonClick = () => {
+            fileInputRef.current?.click();
+          };
+
+          return (
+            <div className="photo-upload-area">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              
+              {photoUrl ? (
+                <img src={photoUrl} alt="Foto del lugar turístico" className="photo-preview" />
+              ) : (
+                <>
+                  <div className="camera-icon">📷</div>
+                  <p>Sube tu foto aquí</p>
+                </>
+              )}
+              
+              <button className="upload-button" onClick={handleButtonClick}>
+                Subir Foto
+              </button>
+            </div>
+          );
+        }
+
+        // Componente para la información del lugar
+        function LocationInfo({ destination }) {
+          return (
+            <div className="location-info">
+              <h3>Información del Lugar</h3>
+              <div className="location-name">{destination.location}</div>
+              <p className="location-description">{destination.description}</p>
+            </div>
+          );
+        }
+
+        // Componente para datos del país
+        function CountryData({ destination }) {
+          return (
+            <div className="country-data">
+              <h3>Datos del País</h3>
+              
+              <div className="data-item">
+                <div className="data-icon">🏛️</div>
+                <div>
+                  <strong>Capital:</strong>
+                  <span>{destination.capital}</span>
+                </div>
+              </div>
+
+              <div className="data-item">
+                <div className="data-icon">💬</div>
+                <div>
+                  <strong>Idioma:</strong>
+                  <span>{destination.language}</span>
+                </div>
+              </div>
+
+              <div className="data-item">
+                <div className="data-icon">💰</div>
+                <div>
+                  <strong>Moneda:</strong>
+                  <span>{destination.currency}</span>
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        // Componente para costo aproximado
+        function ApproximateCost({ destination }) {
+          const costLevels = {
+            '$': 'Muy económico (menos de $50)',
+            '$$': 'Económico ($50-150)',
+            '$$$': 'Medio ($150-300)',
+            '$$$$': 'Caro (más de $300)'
+          };
+
+          return (
+            <div className="section-card">
+              <h3>
+                <span className="section-icon">💵</span>
+                Costo Aproximado
+              </h3>
+              <div className="cost-content">
+                <div>Costo por día: <strong>{destination.costPerDay}</strong> aprox.</div>
+                <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#999' }}>
+                  {costLevels[destination.costPerDay]}
+                </p>
+              </div>
+            </div>
+          );
+        }
+
+        // Componente para actividades
+        function Activities({ destination }) {
+          return (
+            <div className="section-card">
+              <h3>
+                <span className="section-icon">📍</span>
+                Actividades para Hacer
+              </h3>
+              <ul className="activities-list">
+                {destination.activities.map((activity, index) => (
+                  <li key={index}>
+                    <strong>{activity.name}</strong>
+                    <span>{activity.description}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+
+        // Componente para lugares recomendados
+        function RecommendedPlaces({ destination }) {
+          return (
+            <div className="section-card">
+              <h3>
+                <span className="section-icon">🗺️</span>
+                Lugares Recomendados
+              </h3>
+              <ul className="places-list">
+                {destination.nearbyPlaces.map((place, index) => (
+                  <li key={index}>
+                    <strong>{place}</strong>
+                    <span>Lugar cercano recomendado</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+
+        // Componente principal App
+        function App() {
+          const [photoUrl, setPhotoUrl] = React.useState(null);
+          const [currentDestinationIndex, setCurrentDestinationIndex] = React.useState(0);
+
+          const currentDestination = destinationsData.destinations[currentDestinationIndex];
+
+          const handlePhotoUpload = (url) => {
+            setPhotoUrl(url);
+          };
+
+          const handlePreviousDestination = () => {
+            setCurrentDestinationIndex((prev) =>
+              prev === 0 ? destinationsData.destinations.length - 1 : prev - 1
+            );
+            setPhotoUrl(null);
+          };
+
+          const handleNextDestination = () => {
+            setCurrentDestinationIndex((prev) =>
+              prev === destinationsData.destinations.length - 1 ? 0 : prev + 1
+            );
+            setPhotoUrl(null);
+          };
+
+          return (
+            <div className="app">
+              <header className="header">
+                <h1>Descubre Tu Destino</h1>
+              </header>
+
+              <div className="container">
+                {/* Sección de Carga de Foto */}
+                <div className="upload-section">
+                  <h2>Sube una Foto del Lugar Turístico</h2>
+                  <div className="upload-container">
+                    <LocationInfo destination={currentDestination} />
+                    <UploadSection photoUrl={photoUrl} onPhotoUpload={handlePhotoUpload} />
+                    <CountryData destination={currentDestination} />
+                  </div>
+                </div>
+
+                {/* Secciones de Contenido */}
+                <div className="sections-grid">
+                  <ApproximateCost destination={currentDestination} />
+                  <Activities destination={currentDestination} />
+                  <RecommendedPlaces destination={currentDestination} />
+                </div>
+
+                {/* Navegación entre destinos */}
+                <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                  <button
+                    className="upload-button"
+                    onClick={handlePreviousDestination}
+                    style={{ marginRight: '1rem' }}
+                  >
+                    ← Destino Anterior
+                  </button>
+                  <span style={{ 
+                    color: '#666', 
+                    margin: '0 1rem',
+                    fontSize: '1rem'
+                  }}>
+                    Destino {currentDestinationIndex + 1} de {destinationsData.destinations.length}
+                  </span>
+                  <button
+                    className="upload-button"
+                    onClick={handleNextDestination}
+                    style={{ marginLeft: '1rem' }}
+                  >
+                    Siguiente Destino →
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        }
+
+        // Renderizar la aplicación
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

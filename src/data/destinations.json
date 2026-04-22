@@ -1,0 +1,149 @@
+{
+  "destinations": [
+    {
+      "id": 1,
+      "location": "Barcelona, España",
+      "description": "Barcelona es una vibrante ciudad costera conocida por su arquitectura modernista, playas mediterráneas y vida cultural. Puedes disfrutar de la gastronomía catalana, museos de clase mundial y una atmósfera única que combina lo antiguo y lo moderno.",
+      "country": "España",
+      "capital": "Madrid",
+      "language": "Español (Castellano)",
+      "currency": "Euro (€)",
+      "costPerDay": "$$$",
+      "activities": [
+        {
+          "name": "Visitar",
+          "description": "La Sagrada Familia y Parque Güell"
+        },
+        {
+          "name": "Recorrer",
+          "description": "Las Ramblas y Barrio Gótico"
+        },
+        {
+          "name": "Disfrutar",
+          "description": "Playas y tapas en el Port Vell"
+        }
+      ],
+      "nearbyPlaces": [
+        "Montserrat",
+        "Colònia de Sant Jordi",
+        "Costa Brava"
+      ]
+    },
+    {
+      "id": 2,
+      "location": "París, Francia",
+      "description": "La Ciudad de la Luz es el destino romántico por excelencia. Famosa por su arquitectura icónica, museos de renombre mundial, gastronomía refinada y la encantadora atmósfera de sus cafés parisinos.",
+      "country": "Francia",
+      "capital": "París",
+      "language": "Francés",
+      "currency": "Euro (€)",
+      "costPerDay": "$$$",
+      "activities": [
+        {
+          "name": "Visitar",
+          "description": "Torre Eiffel y Arco del Triunfo"
+        },
+        {
+          "name": "Recorrer",
+          "description": "Museos (Louvre, Orsay)"
+        },
+        {
+          "name": "Disfrutar",
+          "description": "Crucero por el Sena"
+        }
+      ],
+      "nearbyPlaces": [
+        "Versalles",
+        "Disneyland París",
+        "Fontainebleau"
+      ]
+    },
+    {
+      "id": 3,
+      "location": "Tokio, Japón",
+      "description": "Tokio es una metrópolis fascinante que mezcla tradición milenaria con tecnología de punta. Desde templos antiguos hasta rascacielos modernos, pasando por mercados tradicionales y distritos electrizantes.",
+      "country": "Japón",
+      "capital": "Tokio",
+      "language": "Japonés",
+      "currency": "Yen Japonés (¥)",
+      "costPerDay": "$$",
+      "activities": [
+        {
+          "name": "Visitar",
+          "description": "Templos de Senso-ji y Tsukiji"
+        },
+        {
+          "name": "Recorrer",
+          "description": "Shibuya, Shinjuku y Akihabara"
+        },
+        {
+          "name": "Disfrutar",
+          "description": "Gastronomía japonesa y karaoke"
+        }
+      ],
+      "nearbyPlaces": [
+        "Monte Fuji",
+        "Nikko",
+        "Kamakura"
+      ]
+    },
+    {
+      "id": 4,
+      "location": "Cancún, México",
+      "description": "Cancún es un paraíso tropical con playas de arena blanca y aguas turquesas. Perfecto para relajarse, disfrutar de actividades acuáticas y explorar la antigua cultura maya.",
+      "country": "México",
+      "capital": "Ciudad de México",
+      "language": "Español",
+      "currency": "Peso Mexicano ($)",
+      "costPerDay": "$$",
+      "activities": [
+        {
+          "name": "Visitar",
+          "description": "Cenotes y Ruinas Mayas de Tulum"
+        },
+        {
+          "name": "Recorrer",
+          "description": "Isla Mujeres en barco"
+        },
+        {
+          "name": "Disfrutar",
+          "description": "Playas y snorkel"
+        }
+      ],
+      "nearbyPlaces": [
+        "Playa del Carmen",
+        "Cozumel",
+        "Xcaret"
+      ]
+    },
+    {
+      "id": 5,
+      "location": "Nueva York, USA",
+      "description": "La ciudad que nunca duerme ofrece una experiencia única con sus icónicos rascacielos, museos de clase mundial, entretenimiento sin fin y una mezcla diversa de culturas.",
+      "country": "Estados Unidos",
+      "capital": "Washington D.C.",
+      "language": "Inglés",
+      "currency": "Dólar Estadounidense ($)",
+      "costPerDay": "$$$",
+      "activities": [
+        {
+          "name": "Visitar",
+          "description": "Estatua de la Libertad y Times Square"
+        },
+        {
+          "name": "Recorrer",
+          "description": "Museos y Broadway"
+        },
+        {
+          "name": "Disfrutar",
+          "description": "Gastronomía diversa y vida nocturna"
+        }
+      ],
+      "nearbyPlaces": [
+        "Las Cataratas del Niágara",
+        "Filadelfia",
+        "Boston"
+      ]
+    }
+  ]
+}
